@@ -1,0 +1,15 @@
+[submodule "lisp/evil"]
+	path = lisp/evil
+	url = https://github.com/emacs-evil/evil
+[submodule "lisp/evil-surround"]
+	path = lisp/evil-surround
+	url = https://github.com/emacs-evil/evil-surround
+[submodule "lisp/goto-chg"]
+	path = lisp/goto-chg
+	url = https://github.com/emacs-evil/goto-chg
+[submodule "lisp/selectrum"]
+	path = lisp/selectrum
+	url = https://github.com/radian-software/selectrum
+[submodule "lisp/shackle"]
+	path = lisp/shackle
+	url = https://depp.brause.cc/shackle.git
