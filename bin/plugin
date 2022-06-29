@@ -8,4 +8,11 @@ mkdir -p "$INSTALL_DIR/share/emacs/$VERSION/site-lisp"
 
 # copy only .el files
 cd "$ROOT/lisp"
-find -name "*.el" | xargs -I{} cp --parents {} "$INSTALL_DIR/share/emacs/$VERSION/site-lisp/"
+find -name "*.el" | xargs -I{} cp -v --parents {} "$INSTALL_DIR/share/emacs/$VERSION/site-lisp/"
+
+# byte compile
+cd "$INSTALL_DIR/share/emacs/$VERSION/site-lisp"
+find -name "*.el" | grep -v "default.el" \
+                  | grep -v "subdirs.el" \
+                  | xargs "$INSTALL_DIR/bin/emacs" --batch -f batch-byte-compile
+
