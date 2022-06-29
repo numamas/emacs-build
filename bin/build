@@ -1,0 +1,38 @@
+#/bin/bash
+set -eu
+source "$(cd "$(dirname "$0")"; pwd)/vars.sh"
+
+# dependencies
+sudo -E apt install curl build-essential git libncurses-dev libjansson-dev
+
+# cd to base directory
+cd "$ROOT"
+
+# retrieve emacs source
+if [ ! -e "./emacs-${VERSION}.tar.gz" ]; then
+    curl -LO "https://github.com/emacs-mirror/emacs/archive/refs/tags/emacs-${VERSION}.tar.gz"
+fi
+
+# extract
+if [ ! -d "./emacs-${VERSION}" ]; then
+    tar zxf "emacs-${VERSION}.tar.gz"
+    mv "emacs-emacs-${VERSION}" "emacs-${VERSION}"
+fi
+
+# build
+cd "emacs-${VERSION}"
+./autogen.sh
+./configure --prefix="$INSTALL_DIR" \
+            --disable-build-details \
+            --without-all           \
+            --without-x             \
+            --without-pop           \
+            --with-xml2             \
+            --with-json             \
+            --with-zlib             \
+            --with-modules          \
+            --with-threads          \
+            --with-file-notification=yes
+make -j $(nproc)
+sudo make install
+sudo chown -R $USER "$INSTALL_DIR"

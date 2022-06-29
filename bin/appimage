@@ -1,0 +1,29 @@
+#/bin/bash
+set -eu
+source "$(cd "$(dirname "$0")"; pwd)/vars.sh"
+
+# clean up
+rm -rf "$APP_DIR"
+mkdir -p "$APP_DIR"
+cp -r "$INSTALL_DIR" "$APP_DIR/usr"
+
+# copy .desktop, icon and AppRun file
+cp "$APP_DIR/usr/share/applications/emacs.desktop" "$APP_DIR/"
+cp "$APP_DIR/usr/share/icons/hicolor/scalable/apps/emacs.svg" "$APP_DIR/"
+cp "$ROOT/AppRun" "$APP_DIR/" && chmod a+x "$APP_DIR/AppRun"
+
+# change PATH
+export PATH="$ROOT/bin/appimagetool:$PATH"
+
+# create appimage
+set +u
+cd "$APP_DIR"
+source "$ROOT/bin/appimagetool/functions.sh"
+copy_deps
+delete_blacklisted
+
+cd ../
+APP='emacs' generate_type2_appimage
+
+# copy executable
+cp ../out/Emacs*.AppImage ../out/emacs
