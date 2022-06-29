@@ -1,0 +1,11 @@
+#/bin/bash
+set -eu
+source "$(cd "$(dirname "$0")"; pwd)/vars.sh"
+
+# clear destination
+rm -rf "$INSTALL_DIR/share/emacs/$VERSION/site-lisp"
+mkdir -p "$INSTALL_DIR/share/emacs/$VERSION/site-lisp"
+
+# copy only .el files
+cd "$ROOT/lisp"
+find -name "*.el" | xargs -I{} cp --parents {} "$INSTALL_DIR/share/emacs/$VERSION/site-lisp/"
