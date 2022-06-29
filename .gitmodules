@@ -10,3 +10,9 @@
 [submodule "lisp/shackle"]
 	path = lisp/shackle
 	url = https://depp.brause.cc/shackle.git
+[submodule "lisp/evil-escape"]
+	path = lisp/evil-escape
+	url = https://github.com/syl20bnr/evil-escape
+[submodule "lisp/avy"]
+	path = lisp/avy
+	url = https://github.com/abo-abo/avy
