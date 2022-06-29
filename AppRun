@@ -11,6 +11,6 @@ export EMACSDOC=$EMACSPATH/etc
 export EMACSLOADPATH=$EMACSPATH/site-lisp:$EMACSPATH/lisp:$EMACSPATH/lisp/emacs-lisp
 export INFOPATH=./local/share/info
 
-"$HERE/usr/bin/emacs" "$@" -L "$EMACSLOADPATH" --dump-file "$HERE/usr/libexec/emacs/$VER/x86_64-pc-linux-gnu/user.pdmp"
+"$HERE/usr/bin/emacs" "$@" -L "$EMACSLOADPATH" --dump-file "$HERE/usr/libexec/emacs/$VER/x86_64-pc-linux-gnu/emacs.pdmp"
 # 明示的に -L を指定しない場合，default location set が存在すればそちらが優先されてしまう．
 
